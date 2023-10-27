@@ -1,14 +1,17 @@
-import pygame
+import os
+from tkinter import Tk
+from tkinter.filedialog import askdirectory
 from pygame import mixer
 from tkinter import *
-import os
-
 def playsong():
-    currentsong=playlist.get(ACTIVE)
-    print(currentsong)
-    mixer.music.load(currentsong)
-    songstatus.set("Playing")
-    mixer.music.play()
+    try:
+        currentsong=playlist.get(ACTIVE)
+        print(currentsong)
+        mixer.music.load(currentsong)
+        songstatus.set("Playing")
+        mixer.music.play()
+    except Exception:
+        print("Please select a Mp3 or other audio file format")
 
 def pausesong():
     songstatus.set("Paused")
@@ -33,8 +36,8 @@ songstatus.set("choosing")
 
 playlist=Listbox(root,selectmode=SINGLE,bg="DodgerBlue2",fg="white",font=('arial',15),width=40)
 playlist.grid(columnspan=5)
-
-os.chdir(r'D:\Musics\song')
+path = askdirectory(title='Select Folder') # shows dialog box and return the path
+os.chdir(path)
 songs=os.listdir()
 for s in songs:
     playlist.insert(END,s)
