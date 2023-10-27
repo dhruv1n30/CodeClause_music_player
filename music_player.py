@@ -10,7 +10,7 @@ def playsong():
         mixer.music.load(currentsong)
         songstatus.set("Playing")
         mixer.music.play()
-    except:
+    except Exception:
         print("Please select a Mp3 or other audio file format")
 
 def pausesong():
